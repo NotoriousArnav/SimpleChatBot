@@ -1,3 +1,4 @@
+# trunk-ignore-all(black)
 from langchain_community.llms import HuggingFaceEndpoint
 from langchain_community.tools import BaseTool, DuckDuckGoSearchRun
 from langchain.agents import initialize_agent
