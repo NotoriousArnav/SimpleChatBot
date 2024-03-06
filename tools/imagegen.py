@@ -8,9 +8,8 @@ class StableDiffusionLofiGirl(BaseTool):
     name = "Stable Diffusion with Lofi Girl Adapter Image Generation"
     description = "Generate images using the Stable Diffusion model with the Lofi Girl adapter and upload them to 0x0.st. Returns the URL of the uploaded image."
 
-    def _run(self, prompt: str, token='') -> str:
-        if not token:
-            token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+    def _run(self, prompt: str) -> str:
+        token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
         api_url = "https://api-inference.huggingface.co/models/Norod78/SDXL-LofiGirl-Lora"
         headers = {"Authorization": f"Bearer {token}"}
         response = requests.post(api_url, headers=headers, json={"inputs": prompt})
@@ -30,9 +29,8 @@ class StableDiffusion(BaseTool):
     name = "Stable Diffusion Image Generation"
     description = "Generate images using the Stable Diffusion model and upload them to 0x0.st. Returns the URL of the uploaded image."
 
-    def _run(self, prompt: str, token='') -> str:
-        if not token:
-            token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+    def _run(self, prompt: str) -> str:
+        token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
         api_url = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
         headers = {"Authorization": f"Bearer {token}"}
         response = requests.post(api_url, headers=headers, json={"inputs": prompt})
@@ -52,9 +50,8 @@ class StudioGhibliArt(BaseTool):
     name = "Studio Ghilbli Art"
     description = "Image Generation using Stable Diffusion. Uses a LoRa that produces the Output in Studio Ghibli Art Style. Returns an Image URL"
 
-    def _run(self, prompt:str, token='') -> str:
-        if not token:
-            token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+    def _run(self, prompt:str) -> str:
+        token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
         API_URL = "https://api-inference.huggingface.co/models/KappaNeuro/studio-ghibli-style"
         headers = {"Authorization": f"Bearer {token}"}
         response = requests.post(
@@ -71,7 +68,7 @@ class StudioGhibliArt(BaseTool):
                 files={'file':data},
                 timeout = 120
             )
-        return str(response.content.strip())
+        return str(response.text.strip())
 
     async def _arun(self, *args, **kwargs):
         raise NotImplementedError()
