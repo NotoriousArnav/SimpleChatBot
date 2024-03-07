@@ -3,12 +3,13 @@ Tools Folder.
 This will contain all the Tools that Are Required to make this ChatBot Kiccck the Ass of ChatGPT!
 """
 from langchain_community.tools import DuckDuckGoSearchRun, BaseTool
-from langchain.tools import WikipediaQueryRun
+from langchain_community.tools import WikipediaQueryRun
 from langchain_community.utilities import WikipediaAPIWrapper
+from langchain_community.tools import ShellTool
 
 # from .starcoder import StarCoder_2_15B, StarCoder_2_3B
 from .calculator import Calculator #BUG: Calculator tool is Shit! Replace it with Wolfram Alpha
-from .imagegen import *
+from .imagegen import StableDiffusion, StableDiffusionLofiGirl, StudioGhibliArt
 
 class MarkdownCodeBlock(BaseTool):
   name = "code_block"
@@ -42,5 +43,6 @@ tools = [
     StableDiffusion(),
     Calculator(),
     MarkdownCodeBlock(),
-    Remember()
+    Remember(),
+    ShellTool()
 ]

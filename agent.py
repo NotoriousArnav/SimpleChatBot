@@ -1,10 +1,12 @@
 from langchain_community.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferWindowMemory
 # from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+# from langchain.agents import *
 from langchain.agents import initialize_agent
 # from langchain.chains import LLMChain
-import tools as tools_module
+# import tools as tools_module
 from tools import tools
+import warnings
 
 repo_id = "mistralai/Mixtral-8x7B-Instruct-v0.1"
 
@@ -64,6 +66,8 @@ Assistant: ```json
  "action_input": "103823"}}
 ```
 ---
+
+Note: Action_input should be a string only to avoid Pydantic errors
 """
 
 B_INST, E_INST = "<|im_start|>user\n", "<|im_end|>\n" #Instruction begin and end
@@ -139,21 +143,20 @@ Notice that after Assistant uses a tool, User will give the output of that tool.
 Assistant will only use the available tools and NEVER a tool not listed. If the User's question does not require the use of a tool, Assistant will use the "Final Answer" action to give a normal response.
 """ + E_SYS
 
-# llm_chain = LLMChain(
-#     llm=llm,
-#     prompt=prompt,
-#     memory=memory
-# )
 
-agent = initialize_agent(
-    agent="chat-conversational-react-description",
-    tools=tools,
-    llm=llm,
-    verbose=True,
-    early_stopping_method="generate",
-    memory=memory,
-    handle_parsing_errors=True,
-)
+#TODO: Remove this Temporary Fix
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    agent = initialize_agent(
+        agent="chat-conversational-react-description",
+        tools=tools,
+        llm=llm,
+        verbose=True,
+        early_stopping_method="generate",
+        memory=memory,
+        handle_parsing_errors=True,
+    )
+
 
 new_prompt = agent.agent.create_prompt(
     system_message=sys_msg,
