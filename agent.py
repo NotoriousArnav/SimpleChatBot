@@ -1,16 +1,9 @@
-from langchain_community.llms import HuggingFaceEndpoint
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.agents import initialize_agent
+
 from tools import tools
+from llm import llm
 import warnings
-
-repo_id = "mistralai/Mixtral-8x7B-Instruct-v0.1"
-
-llm = HuggingFaceEndpoint(
-    repo_id=repo_id,
-    temperature=0.1,
-    streaming=True
-)
 
 memory = ConversationBufferWindowMemory(
     memory_key="chat_history",
@@ -40,7 +33,7 @@ Assistant: ```json
 {{"action": "Final Answer",
  "action_input": "I'm good thanks, how are you?"}}
 ```
-User: I'm great, what is the length of the word educate?
+User: I'm'\n\nExample Domain\n\n\n\n\n\n\n\nExample Domain\nThis domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.\nMore information...\n\n\n\n' great, what is the length of the word educate?
 Assistant: ```json
 {{"action": "Word Length Tool",
  "action_input": "educate"}}
@@ -81,10 +74,24 @@ AI: ```json
  "action_input": "Cute Girl sitting in Park Bench in Heavy Rain smiling with a Golden Retriver Adult Dog with its company"}}
 ```
 User: https://0x0.st/H7YF.jpg
-Assistant:```json
+AI:```json
 {{
   "action": "Final Answer",
   "action_input": "Image has been Generated.Image URL is https://0x0.st/H7YF.jpg"
+}}
+```
+User: Please Sum up this Article for me, https://www.example.com
+AI: ```json
+{{
+    "action": "scrape_article",
+    "action_input": "https://www.example.com"
+}}
+```
+User: 'Example Domain\n\n\n\n\n\n\n\nExample Domain\nThis domain is for use in illustrative examples in documents. You may use this\n    domain in literature without prior coordination or asking for permission.\nMore information...'
+AI: ```json
+{{
+    "action": "Final Answer",
+    "action_input": "This is an Example article that can be used as a Placeholder on various places."
 }}
 ```
 ---

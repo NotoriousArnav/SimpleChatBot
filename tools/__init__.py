@@ -6,10 +6,14 @@ from langchain_community.tools import DuckDuckGoSearchRun, BaseTool
 from langchain_community.tools import WikipediaQueryRun
 from langchain_community.utilities import WikipediaAPIWrapper
 from langchain_community.tools import ShellTool
+from .anyscraper import PageText
+from .textsum import text_summarization
 
 # from .starcoder import StarCoder_2_15B, StarCoder_2_3B
 from .calculator import Calculator #BUG: Calculator tool is Shit! Replace it with Wolfram Alpha
 from .imagegen import StableDiffusion, StableDiffusionLofiGirl, StudioGhibliArt
+
+wikipedia = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
 
 class MarkdownCodeBlock(BaseTool):
   name = "code_block"
@@ -44,5 +48,8 @@ tools = [
     Calculator(),
     MarkdownCodeBlock(),
     Remember(),
-    ShellTool()
+    ShellTool(),
+    wikipedia,
+    PageText(),
+    text_summarization
 ]
