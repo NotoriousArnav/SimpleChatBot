@@ -12,7 +12,7 @@ class text_summarization(BaseTool):
     def query(self, payload):
         API_URL = "https://api-inference.huggingface.co/models/Falconsai/text_summarization"
         headers = {
-                "Authorization": f"Bearer {os.getenv('HUGGINGFACEHUB_API_TOKEN')}"HUGGINGFACEHUB_API_TOKEN
+                "Authorization": f"Bearer {os.getenv('HUGGINGFACEHUB_API_TOKEN')}"
             }
         response = requests.post(API_URL, headers=headers, json=payload)
         return response.json()

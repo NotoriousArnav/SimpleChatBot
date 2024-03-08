@@ -1,5 +1,7 @@
 import chainlit as cl
-from agent import agent
+from agent import create_agent
+
+agent = create_agent()
 
 @cl.on_message
 async def main(message: cl.Message):

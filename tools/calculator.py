@@ -2,7 +2,7 @@ from langchain_community.tools import BaseTool
 import numexpr as ne
 
 #TODO: Add Sympy and Matplotlib for Data Visualization
-#BUG: Replace numexpr with Wolfram alpha
+#BUG: Replace numexpr with Wolfram alpha and Qalculate or similar
 
 class Calculator(BaseTool):
     name = "Calculator"

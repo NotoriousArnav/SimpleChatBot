@@ -1,4 +1,4 @@
-from agent import agent
+from agent import create_agent
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -13,6 +13,7 @@ parser.add_argument("-v", "--verbose", help="If you want to look into Aditya's T
 
 args = parser.parse_args()
 
+agent = create_agent()
 agent.verbose = args.verbose
 
 out = agent.invoke(args.prompt)['output']

@@ -51,5 +51,5 @@ tools = [
     ShellTool(),
     wikipedia,
     PageText(),
-    text_summarization
+    text_summarization()
 ]
