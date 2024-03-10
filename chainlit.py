@@ -12,3 +12,5 @@ async def main(message: cl.Message):
     await cl.Message(
         content=out,
     ).send()
+
+# TODO: After Each Run Dump the memory to *.memory.log.json

@@ -1,15 +1,8 @@
-from langchain.memory import ConversationBufferWindowMemory
 from langchain.agents import initialize_agent
-
+from memory import memory
 from tools import tools
 from llm import llm
 import warnings
-
-memory = ConversationBufferWindowMemory(
-    memory_key="chat_history",
-    k=15,
-    return_messages=True,
-)
 
 #TODO: Remove this Temporary Fix
 def create_agent(llm=llm, tools=tools, memory=memory):
@@ -21,7 +14,7 @@ def create_agent(llm=llm, tools=tools, memory=memory):
         sys_msg = B_SYS + """You are Assistant named Aditya. Assistant is a expert JSON builder designed to assist with a wide range of tasks.
         Assistant is a Really good Programmer from India.
         Assistant should remeber User's Preferences like Language, Name and other Details more Clearly.
-
+        Assistant should be always truthful.
         Assistant is able to respond to the User and use tools using JSON strings that contain "action" and "action_input" parameters.
 
         All of Assistant's communication is performed using this JSON format. The assistant NEVER outputs anything other than a json object with an action and action_input fields!
@@ -111,7 +104,7 @@ def create_agent(llm=llm, tools=tools, memory=memory):
             verbose=True,
             early_stopping_method="generate",
             memory=memory,
-            handle_parsing_errors=True,
+            # handle_parsing_errors=True,
         )
         new_prompt = agent.agent.create_prompt(
             system_message=sys_msg,
