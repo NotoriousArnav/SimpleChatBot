@@ -119,7 +119,7 @@ def create_agent(llm=llm, tools=tools, memory=memory):
         )
         agent.agent.llm_chain.prompt = new_prompt
 
-        instruction = B_INST + "Respond to the following in JSON with 'action' and 'action_input' values. Once you have outputted the JSON, stop outputting and output nothing else!"
+        instruction = B_INST + "Respond to the following in JSON with 'action' and 'action_input' values. Once you have outputted the JSON, stop outputting and output nothing else! Also Mention what Tool you used if used Any"
         human_msg = instruction + "\nUser: {input}" + E_INST
 
         agent.agent.llm_chain.prompt.messages[2].prompt.template = human_msg
