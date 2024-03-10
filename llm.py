@@ -12,6 +12,6 @@ with open(os.devnull, 'w') as null_file:
     with redirect_stdout(null_file), redirect_stderr(null_file):
         llm = HuggingFaceEndpoint(
             repo_id=repo_id,
-            temperature=0.1,
+            temperature=0.5,
             # streaming=True,
         )
