@@ -13,5 +13,5 @@ class PageText(BaseTool):
                 timeout=60,
                 allow_redirects=True
             )
-        soup = bs4.BeautifulSoup(response.content)
-        return soup.text
+        soup = bs4.BeautifulSoup(response.content, 'lxml')
+        return soup.text.strip()

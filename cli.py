@@ -14,7 +14,7 @@ def cprint(text, color=colorama.Fore.WHITE, delay=0.03):
     print(colorama.Style.RESET_ALL, end="", flush=True)
 
 def print_output_thinking(text):
-    cprint("Assistant : ", colorama.Fore.GREEN)
+    cprint("Aditya : ", colorama.Fore.GREEN)
     cprint("Thinking", colorama.Fore.YELLOW, delay=0.1)
     while not output_received:  # Continue animation until output is received
         for _ in range(3):  # Simulate thinking with a simple animation
@@ -29,7 +29,7 @@ def output_thread_func(prompt):
     output_received = True
 
 def print_output(text):
-    cprint("Assistant : ", colorama.Fore.GREEN)
+    cprint("Aditya : ", colorama.Fore.GREEN)
     cprint(text, colorama.Fore.WHITE)
 
 parser = argparse.ArgumentParser(

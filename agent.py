@@ -104,7 +104,7 @@ def create_agent(llm=llm, tools=tools, memory=memory):
             verbose=True,
             early_stopping_method="generate",
             memory=memory,
-            # handle_parsing_errors=True,
+                                 handle_parsing_errors=True, # BUG: Can Cause the LLM to go in a Neverending loop
         )
         new_prompt = agent.agent.create_prompt(
             system_message=sys_msg,
